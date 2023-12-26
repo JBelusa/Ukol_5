@@ -1,0 +1,4 @@
+Fialka 1	Popis fialky - je fialová a hezká	3	2021-05-12	2021-01-01
+Vánoční hvězda bez poznámky		4	2021-05-10	2021-04-01
+Kaktus	nedotýkat	14	2023-12-26	2023-12-26
+Pampeliška	žlutá	1	2018-10-02	2018-10-01

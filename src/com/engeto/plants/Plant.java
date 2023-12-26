@@ -1,3 +1,5 @@
+package com.engeto.plants;
+
 import java.time.LocalDate;
 
 public class Plant {
@@ -53,7 +55,7 @@ public class Plant {
 
     public void setWatering(LocalDate watering) throws PlantException {
         if (watering.isBefore(this.getPlanted())) {
-            throw new PlantException("Datum zálivky musí být před datem zasazení nebo v den zasazení");
+            throw new PlantException("Datum zálivky musí být před datem zasazení nebo v den zasazení.");
         } else {
             this.watering = watering;
         }
@@ -65,19 +67,19 @@ public class Plant {
 
     public void setFrequencyOfWatering(int frequencyOfWatering) throws PlantException {
         if (frequencyOfWatering <= 0) {
-            throw new PlantException("Zadaná hodnota frekvence zálivky musí být větší než nula");
+            throw new PlantException("Zadaná hodnota frekvence zálivky musí být větší než nula.");
         } else {
             this.frequencyOfWatering = frequencyOfWatering;
         }
     }
 
     public String getWateringInfo() {
-        String var10000 = this.getName();
-        return "Název květiny: " + var10000 + ", Datum poslední zálivky: " + String.valueOf(this.getWatering()) + ", Datum doporučené další zálivky: " + String.valueOf(this.getWatering().plusDays((long)this.getFrequencyOfWatering()));
+
+        return "Název květiny: " + this.getName() + ", Datum poslední zálivky: " + String.valueOf(this.getWatering()) + ", Datum doporučené další zálivky: " + String.valueOf(this.getWatering().plusDays((long)this.getFrequencyOfWatering()));
     }
 
     public String toString() {
-        String var10000 = this.name;
-        return "Plant{name='" + var10000 + "', notes='" + this.notes + "', planted=" + String.valueOf(this.planted) + ", watering=" + String.valueOf(this.watering) + ", frequencyOfWatering=" + this.frequencyOfWatering + "}";
+
+        return "com.engeto.plants.Plant{name='" + this.getName() + "', notes='" + this.notes + "', planted=" + String.valueOf(this.planted) + ", watering=" + String.valueOf(this.watering) + ", frequencyOfWatering=" + this.frequencyOfWatering + "}";
     }
 }
