@@ -3,7 +3,7 @@ package com.engeto.plants;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Plant {
+public class Plant implements Comparable<Plant>{
     private String name;
     private String notes;
     private LocalDate planted;
@@ -87,4 +87,8 @@ public class Plant {
     }
 
 
+    @Override
+    public int compareTo(Plant otherPlant) {
+        return this.getName().compareTo(otherPlant.getName());
+    }
 }
