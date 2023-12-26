@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class PlantList {
     private List<Plant> plantsList = new ArrayList();
 
+    //region Knstruktory
     public PlantList() {
         this.plantsList.addAll(this.plantsList);
     }
@@ -21,12 +22,15 @@ public class PlantList {
     public List<Plant> getPlantsList() {
         return this.plantsList;
     }
+    //endregion
 
+    //Metoda pro přidání kytky
     public void addPlant(Plant newPlant) {
 
         this.plantsList.add(newPlant);
     }
 
+    //Metoda pro vymazání kytky s daným indexem
     public void removeItem(int indexOfPlant) {
         this.plantsList.remove(indexOfPlant);
     }
@@ -35,13 +39,14 @@ public class PlantList {
         return (Plant) this.plantsList.get(indexOfPlant);
     }
 
+    //Metoda pro vypsání informace o všech kytkách v daném seznamu
     public void printWateringInfo() {
         for (Plant plant : getPlantsList()) {
             System.out.println(plant.getWateringInfo());
         }
     }
 
-
+    //Metoda pro načtení kytek z textového souboru a jejich přidání do seznamu
     public static PlantList loadFromFile(String filename) throws PlantException {
         PlantList newPlantlist = new PlantList();
         int lineNumber = 1;
@@ -59,6 +64,7 @@ public class PlantList {
         return newPlantlist;
     }
 
+    //Metoda procházení textového souboru a přiřazení jednotlivých parametrů k proměnným
     public static void parseLine(String line, PlantList plantList, int lineNumber) throws PlantException {
         String[] blocks = line.split("\\t");
 
@@ -79,20 +85,20 @@ public class PlantList {
         try {
             watering = LocalDate.parse(blocks[3].trim());
         } catch (DateTimeParseException e) {
-            throw new PlantException("Nesprávně zadaný formát datumu zálivky \"" + blocks[3] + "\" na řádku " + lineNumber + ". Zadaná hodnota musí být ve formátu YYYY-MM-DD !");
+            throw new PlantException("Nesprávně zadaný formát data zálivky \"" + blocks[3] + "\" na řádku " + lineNumber + ". Zadaná hodnota musí být ve formátu YYYY-MM-DD !");
         }
 
         LocalDate planted = null;
         try {
             planted = LocalDate.parse(blocks[4].trim());
         } catch (DateTimeParseException e) {
-            throw new PlantException("Nesprávně zadaný formát datumu zasazenní \"" + blocks[4] + "\" na řádku " + lineNumber + ". Zadaná hodnota musí být ve formátu YYYY-MM-DD !");
+            throw new PlantException("Nesprávně zadaný formát data zasazenní \"" + blocks[4] + "\" na řádku " + lineNumber + ". Zadaná hodnota musí být ve formátu YYYY-MM-DD !");
         }
 
         Plant newPlant = new Plant(name, note, planted, watering, frequencyOfWatering);
         plantList.addPlant(newPlant);
     }
-
+    //Metoda pro uložení seznamu kytek do textového souboru (tabulátory jsou uloženy jako konstanty třídy Settings)
     public static void saveToFile(String filename, PlantList plantlist) throws PlantException {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))) {
             for (Plant plant : plantlist.plantsList) {

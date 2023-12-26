@@ -1,6 +1,7 @@
 package com.engeto.plants;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Plant {
     private String name;
@@ -9,6 +10,7 @@ public class Plant {
     private LocalDate watering;
     private int frequencyOfWatering;
 
+    //region Konstruktory pro vytvoření kytky dle zadání
     public Plant(String name, String notes, LocalDate planted, LocalDate watering, int frequencyOfWatering) throws PlantException {
         this.name = name;
         this.notes = notes;
@@ -24,7 +26,9 @@ public class Plant {
     public Plant(String name) throws PlantException {
         this(name, "", LocalDate.now(), LocalDate.now(), 7);
     }
+    //endregion
 
+    //region Přístupové metody dle zadání s ošetřenýma podmínkama
     public String getName() {
         return this.name;
     }
@@ -72,14 +76,15 @@ public class Plant {
             this.frequencyOfWatering = frequencyOfWatering;
         }
     }
+    //endregion
 
+    //Informace o kytce dle zadání s formátovaným výstupním datem
     public String getWateringInfo() {
 
-        return "Název květiny: " + this.getName() + ", Datum poslední zálivky: " + String.valueOf(this.getWatering()) + ", Datum doporučené další zálivky: " + String.valueOf(this.getWatering().plusDays((long)this.getFrequencyOfWatering()));
+        return "Název květiny: " + this.getName() +
+                ", Datum poslední zálivky: " + this.getWatering().format(DateTimeFormatter.ofPattern("d.M.uuuu")) +
+                ", Datum doporučené další zálivky: " + this.getWatering().plusDays((long) this.getFrequencyOfWatering()).format(DateTimeFormatter.ofPattern("d.M.uuuu"));
     }
 
-    public String toString() {
 
-        return "com.engeto.plants.Plant{name='" + this.getName() + "', notes='" + this.notes + "', planted=" + String.valueOf(this.planted) + ", watering=" + String.valueOf(this.watering) + ", frequencyOfWatering=" + this.frequencyOfWatering + "}";
-    }
 }

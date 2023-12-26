@@ -1,5 +1,7 @@
 package com.engeto.plants;
 
+//Třída s konstantami názvů souborů textových souborů, se kterými pracujeme
+
 public class Settings {
     private static final String getFilePlantDelimiter = "\t";
     private static final String defaultFileName = "kvetiny.txt";
