@@ -1,5 +1,6 @@
 package com.engeto.plants;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Collections;
 
@@ -8,14 +9,11 @@ public class Main {
 
         System.out.println("\n------Testovací aplikace lekce 5");
 
+
         //Vytvoření seznamu rostlin
-        PlantList testPlantList = loadPlants(Settings.getDefaultFileName());
-        //Vytvoření seznamu rostlin pracující se souborem se špatným datem
+        PlantList testPlantList = loadPlants(chooseFile());
 
-        //PlantList testPlantList = loadPlants(Settings.getTestWrongDate());
-        //Vytvoření seznamu rostlin pracující se souborem se špatnou frekvencí zálivky
 
-        //PlantList testPlantList = loadPlants(Settings.getTestWrongFrequency());
         System.out.println("\nVypsání načteného seznamu rostlin z textového souboru");
 
 
@@ -60,6 +58,19 @@ public class Main {
 
         //endregion
 
+    }
+
+    private static String chooseFile() {
+        String[] options = {"Správný seznam", "Špatné datum", "Špatná frekvence"};
+
+        var name = JOptionPane.showOptionDialog(null, "Vyber soubor:", "Výběr čteného souboru", 0, 3, null, options, null);
+
+        return switch (name) {
+            case 0 -> Settings.getDefaultFileName();
+            case 1 -> Settings.getTestWrongDate();
+            case 2 -> Settings.getTestWrongFrequency();
+            default -> null;
+        };
     }
 
     //Metoda pro načtení seznamu rostlin ze souboru s požadovaným jménem
